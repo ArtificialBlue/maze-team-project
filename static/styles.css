@@ -1,0 +1,27 @@
+body {
+  background: #141414;
+  color: #BE231D;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  margin:0;
+}
+
+#header {
+  background:#BE231D;
+  color: #141414;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+h1 {
+  font-size: 3.33rem;
+}
+
+#maze-canvas {
+  border: 2px solid #0040F5;
+  border-radius: 5px;
+}
+
+#maze-data {
+  display:none;
+}
