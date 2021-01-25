@@ -227,11 +227,11 @@ var MazeGame = /** @class */ (function () {
             new Sprite(this.canvas.width, -100, 100, this.canvas.height + 100, 'none', false),
             new Sprite(-100, this.canvas.height, this.canvas.width + 100, 100, 'none', false)
         ];
-        this.winArea = new Sprite(this.canvas.width - 50, this.canvas.height - 50, 50, 50, '#00FF00', false);
         var mazeData = document.querySelector('#maze-data').innerHTML.split('');
         var bricks = [];
         var numCols = Math.sqrt(mazeData.length);
         var brickSize = this.canvas.width / numCols;
+        this.winArea = new Sprite(this.canvas.width - brickSize, this.canvas.height - brickSize, brickSize, brickSize, '#00FF00', false);
         this.player = new Sprite(5, 5, brickSize - 5, brickSize - 5, '#FFFF00', true);
         var col = 0;
         var row = 0;
