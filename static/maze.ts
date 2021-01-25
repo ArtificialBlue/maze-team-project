@@ -146,6 +146,7 @@ class MazeGame {
     canvasBounds:Array<Sprite>;
     maze:Array<Sprite>;
     player:Sprite;
+    winArea:Sprite;
 
     constructor() {
         this.canvas = <HTMLCanvasElement> document.getElementById('maze-canvas');
@@ -156,6 +157,7 @@ class MazeGame {
             new Sprite(this.canvas.width, -100, 100, this.canvas.height + 100,'none',false),
             new Sprite(-100, this.canvas.height, this.canvas.width + 100, 100, 'none',false)
         ];
+        this.winArea = new Sprite(this.canvas.width - 50, this.canvas.height - 50, 50, 50, '#00FF00', false);
         const mazeData:Array<string> = document.querySelector('#maze-data').innerHTML.split('');
         const bricks:Array<Sprite> = [];
         const numCols:number = Math.sqrt(mazeData.length);
@@ -184,12 +186,14 @@ class MazeGame {
         brick.draw(this.ctx);
       });
 
+      this.winArea.draw(this.ctx);
+
       this.animationLoop();
     }
 
     // Note: lamba syntax is required here to make sure the 'this' context persists through animation frames
     animationLoop = ():void => {
-      const { ctx, maze, player, animationLoop, canvasBounds } = this;
+      const { ctx, maze, player, animationLoop, canvasBounds, winArea } = this;
       // Clear canvas for redrawing
       ctx.clearRect(player.x, player.y, player.size.x, player.size.y);
 
@@ -210,8 +214,15 @@ class MazeGame {
       });
       player.draw(ctx);
 
-      // Loop on browser animation frame
-      requestAnimationFrame(animationLoop);
+      // Check win condition
+      if (player.checkCollision(winArea)) {
+        // Win
+        window.alert("YOU WIN!");
+      } else {
+        // Not win
+        // Loop on browser animation frame
+        requestAnimationFrame(animationLoop);
+      }
     }
 
     keyDownHandler = (e:KeyboardEvent):void => {

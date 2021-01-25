@@ -150,11 +150,12 @@ var MazeGame = /** @class */ (function () {
             _this.maze.forEach(function (brick) {
                 brick.draw(_this.ctx);
             });
+            _this.winArea.draw(_this.ctx);
             _this.animationLoop();
         };
         // Note: lamba syntax is required here to make sure the 'this' context persists through animation frames
         this.animationLoop = function () {
-            var _a = _this, ctx = _a.ctx, maze = _a.maze, player = _a.player, animationLoop = _a.animationLoop, canvasBounds = _a.canvasBounds;
+            var _a = _this, ctx = _a.ctx, maze = _a.maze, player = _a.player, animationLoop = _a.animationLoop, canvasBounds = _a.canvasBounds, winArea = _a.winArea;
             // Clear canvas for redrawing
             ctx.clearRect(player.x, player.y, player.size.x, player.size.y);
             // Move player, then check/handle collisions, then draw player
@@ -171,8 +172,16 @@ var MazeGame = /** @class */ (function () {
                 }
             });
             player.draw(ctx);
-            // Loop on browser animation frame
-            requestAnimationFrame(animationLoop);
+            // Check win condition
+            if (player.checkCollision(winArea)) {
+                // Win
+                window.alert("YOU WIN!");
+            }
+            else {
+                // Not win
+                // Loop on browser animation frame
+                requestAnimationFrame(animationLoop);
+            }
         };
         this.keyDownHandler = function (e) {
             if (e.key === 'Right' || e.key === 'ArrowRight') {
@@ -218,6 +227,7 @@ var MazeGame = /** @class */ (function () {
             new Sprite(this.canvas.width, -100, 100, this.canvas.height + 100, 'none', false),
             new Sprite(-100, this.canvas.height, this.canvas.width + 100, 100, 'none', false)
         ];
+        this.winArea = new Sprite(this.canvas.width - 50, this.canvas.height - 50, 50, 50, '#00FF00', false);
         var mazeData = document.querySelector('#maze-data').innerHTML.split('');
         var bricks = [];
         var numCols = Math.sqrt(mazeData.length);
