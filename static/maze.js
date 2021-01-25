@@ -184,36 +184,36 @@ var MazeGame = /** @class */ (function () {
             }
         };
         this.keyDownHandler = function (e) {
-            if (e.key === 'Right' || e.key === 'ArrowRight') {
+            if (e.key === 'd' || e.key === 'ArrowRight') {
                 _this.player.velocity = new Vector(3, 0);
             }
-            else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+            else if (e.key === 'a' || e.key === 'ArrowLeft') {
                 _this.player.velocity = new Vector(-3, 0);
             }
-            else if (e.key === 'Up' || e.key === 'ArrowUp') {
+            else if (e.key === 'w' || e.key === 'ArrowUp') {
                 _this.player.velocity = new Vector(0, -3);
             }
-            else if (e.key === 'Down' || e.key === 'ArrowDown') {
+            else if (e.key === 's' || e.key === 'ArrowDown') {
                 _this.player.velocity = new Vector(0, 3);
             }
         };
         this.keyUpHandler = function (e) {
-            if (e.key === 'Right' || e.key === 'ArrowRight') {
+            if (e.key === 'd' || e.key === 'ArrowRight') {
                 if (_this.player.velocity.x > 0) {
                     _this.player.velocity = new Vector(0, 0);
                 }
             }
-            else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+            else if (e.key === 'a' || e.key === 'ArrowLeft') {
                 if (_this.player.velocity.x < 0) {
                     _this.player.velocity = new Vector(0, 0);
                 }
             }
-            else if (e.key === 'Up' || e.key === 'ArrowUp') {
+            else if (e.key === 'w' || e.key === 'ArrowUp') {
                 if (_this.player.velocity.y < 0) {
                     _this.player.velocity = new Vector(0, 0);
                 }
             }
-            else if (e.key === 'Down' || e.key === 'ArrowDown') {
+            else if (e.key === 's' || e.key === 'ArrowDown') {
                 if (_this.player.velocity.y > 0) {
                     _this.player.velocity = new Vector(0, 0);
                 }

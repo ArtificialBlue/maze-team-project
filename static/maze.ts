@@ -226,31 +226,31 @@ class MazeGame {
     }
 
     keyDownHandler = (e:KeyboardEvent):void => {
-       if (e.key === 'Right' || e.key === 'ArrowRight') {
+       if (e.key === 'd' || e.key === 'ArrowRight') {
            this.player.velocity = new Vector(3, 0);
-       } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+       } else if (e.key === 'a' || e.key === 'ArrowLeft') {
            this.player.velocity = new Vector(-3, 0);
-       } else if (e.key === 'Up' || e.key === 'ArrowUp') {
+       } else if (e.key === 'w' || e.key === 'ArrowUp') {
            this.player.velocity = new Vector(0, -3);
-       } else if (e.key === 'Down' || e.key === 'ArrowDown') {
+       } else if (e.key === 's' || e.key === 'ArrowDown') {
            this.player.velocity = new Vector(0, 3);
        }
    }
 
    keyUpHandler = (e:KeyboardEvent):void => {
-       if (e.key === 'Right' || e.key === 'ArrowRight') {
+       if (e.key === 'd' || e.key === 'ArrowRight') {
            if (this.player.velocity.x > 0) {
                this.player.velocity = new Vector(0, 0);
            }
-       } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+       } else if (e.key === 'a' || e.key === 'ArrowLeft') {
            if (this.player.velocity.x < 0) {
                this.player.velocity = new Vector(0, 0);
            }
-       } else if (e.key === 'Up' || e.key === 'ArrowUp') {
+       } else if (e.key === 'w' || e.key === 'ArrowUp') {
            if (this.player.velocity.y < 0) {
                this.player.velocity = new Vector(0, 0);
            }
-       } else if (e.key === 'Down' || e.key === 'ArrowDown') {
+       } else if (e.key === 's' || e.key === 'ArrowDown') {
            if (this.player.velocity.y > 0) {
                this.player.velocity = new Vector(0, 0);
            }
