@@ -1,3 +1,4 @@
 /env/
-.vscode
+/.vscode
+/.maze_samples
 .DS_Store
