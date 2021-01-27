@@ -1,25 +1,3 @@
-/* Upper level interface for all objects within our game
-interface RenderableObject {
-  // Properties for all renderable objects
-   position:Vector;
-   size:Vector;
-   color:string;
-   movable:boolean;
-
-   // We need to be able to change the position
-   // Always return the new position
-   updatePosition(delta:Vector):Vector;
-
-   // Check for collision between this object and a specified object
-   // Based on both objects positions and sizes
-   checkCollision(target:RenderableObject):boolean;
-
-   // Every drawn object needs to have some logic that draws it
-   // Dependency injection is the canvas context
-   draw(ctx:CanvasRenderingContext2D):void;
-}
-*/
-
 /* General vector class for physics calculations */
 class Vector {
     // Instance properties
@@ -178,9 +156,10 @@ class MazeGame {
           }
         });
 
-        this.maze = [new Sprite(50,50,brickSize,brickSize, '#00405f', false)];
+        this.maze = bricks;
     }
 
+    // Note: lamba syntax is required here to make sure the 'this' context persists through animation frames
     start = ():void => {
       this.maze.forEach((brick) => {
         brick.draw(this.ctx);
@@ -191,7 +170,6 @@ class MazeGame {
       this.animationLoop();
     }
 
-    // Note: lamba syntax is required here to make sure the 'this' context persists through animation frames
     animationLoop = ():void => {
       const { ctx, maze, player, animationLoop, canvasBounds, winArea } = this;
       // Clear canvas for redrawing
