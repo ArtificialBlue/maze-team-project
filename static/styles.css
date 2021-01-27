@@ -1,3 +1,13 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 body {
   background: #141414;
   color: #BE231D;
@@ -6,11 +16,21 @@ body {
   margin:0;
 }
 
-#header {
+header, footer {
   background:#BE231D;
   color: #141414;
   padding-top: 24px;
   padding-bottom: 24px;
+}
+
+header a {
+  text-decoration: none;
+  color: #141414;
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -23,5 +43,5 @@ h1 {
 }
 
 #maze-data {
-  display:none;
+  display: none;
 }

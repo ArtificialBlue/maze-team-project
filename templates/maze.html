@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Level {{ level }}</h1>
+
+<section id="maze-container">
+  <canvas id="maze-canvas" width=400 height=400></canvas>
+  <p id="maze-data">{{ mazeData }}</p>
+</section>
+
+<script src="/static/maze.js"></script>
+
+{% endblock content %}
