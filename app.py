@@ -15,8 +15,6 @@ def get_maze(level):
 
     bitstring = bitstring.replace("\n", "")  # Removes newlines
 
-    print(bitstring)
-
     return(bitstring)
 
 @app.route('/')
