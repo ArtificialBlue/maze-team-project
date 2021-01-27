@@ -1,3 +1,5 @@
+"""Random Maze Game (by Wildebeests)."""
+
 from flask import Flask, render_template
 app = Flask(__name__)
 
@@ -13,7 +15,7 @@ def get_maze(level):
     with open(filename, "r") as mz:
         bitstring = mz.read().replace("\n", "")
 
-    return(bitstring)
+    return bitstring
 
 @app.route('/')
 def home():
