@@ -46,39 +46,39 @@ class Sprite {
 
     // Instantiation
     constructor(x:number, y:number, width:number, height:number, color:string, movable:boolean) {
-        this.position = new Vector(x, y);
-        this.velocity = new Vector(0, 0);
-        this.size = new Vector(width, height);
-        this.color = color;
-        this.movable = movable;
+      this.position = new Vector(x, y);
+      this.velocity = new Vector(0, 0);
+      this.size = new Vector(width, height);
+      this.color = color;
+      this.movable = movable;
     }
 
     // Accessors
     get x():number{
-        return this.position.x;
+      return this.position.x;
     }
 
     get y():number {
-        return this.position.y;
+      return this.position.y;
     }
 
     get width():number {
-        return this.size.x;
+      return this.size.x;
     }
 
     get height():number {
-        return this.size.y;
+      return this.size.y;
     }
 
     // Modifiers
     updatePosition(delta:Vector):Vector {
-        if(this.movable) {
-            const new_x = this.x + delta.x;
-            const new_y = this.y + delta.y;
-            this.prevPosition = new Vector(this.x, this.y);
-            this.position.update(new_x, new_y);
-            return this.position;
-        }
+      if(this.movable) {
+          const new_x = this.x + delta.x;
+          const new_y = this.y + delta.y;
+          this.prevPosition = new Vector(this.x, this.y);
+          this.position.update(new_x, new_y);
+          return this.position;
+      }
     }
 
     revertPosition():Vector {
@@ -90,30 +90,30 @@ class Sprite {
 
     // Check for collisions
     checkCollision(target:Sprite):boolean {
-        if (this.position.x + this.size.x > target.position.x && this.position.x < target.position.x + target.size.x) {
-            if (this.position.y + this.size.y > target.position.y && this.position.y < target.position.y + target.size.y) {
-                return true;
-            }
-        }
-        return false;
+      if (this.position.x + this.size.x > target.position.x && this.position.x < target.position.x + target.size.x) {
+          if (this.position.y + this.size.y > target.position.y && this.position.y < target.position.y + target.size.y) {
+              return true;
+          }
+      }
+      return false;
     }
 
     // Render
     draw(ctx:CanvasRenderingContext2D):void {
-        const canvasWidth = ctx.canvas.clientWidth;
-        const canvasHeight = ctx.canvas.clientHeight;
+      const canvasWidth = ctx.canvas.clientWidth;
+      const canvasHeight = ctx.canvas.clientHeight;
 
-        // Draw the object using our instance properties
-        ctx.beginPath();
-        ctx.rect(this.x, this.y, this.width, this.height);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.closePath();
+      // Draw the object using our instance properties
+      ctx.beginPath();
+      ctx.rect(this.x, this.y, this.width, this.height);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.closePath();
     }
 
     // Updating position for sprite will utilize velocity
    move() {
-       this.updatePosition(this.velocity);
+     this.updatePosition(this.velocity);
    }
 }
 
@@ -127,36 +127,36 @@ class MazeGame {
     winArea:Sprite;
 
     constructor() {
-        this.canvas = <HTMLCanvasElement> document.getElementById('maze-canvas');
-        this.ctx = this.canvas.getContext('2d');
-        this.canvasBounds = [
-            new Sprite(-100, -100, 100, this.canvas.height + 100,'none', false),
-            new Sprite(-100, -100, this.canvas.width + 100, 100,'none',false),
-            new Sprite(this.canvas.width, -100, 100, this.canvas.height + 100,'none',false),
-            new Sprite(-100, this.canvas.height, this.canvas.width + 100, 100, 'none',false)
-        ];
-        const mazeData:Array<string> = document.querySelector('#maze-data').innerHTML.split('');
-        const bricks:Array<Sprite> = [];
-        const numCols:number = Math.sqrt(mazeData.length);
-        const brickSize:number = this.canvas.width / numCols;
-        this.winArea = new Sprite(this.canvas.width - brickSize, this.canvas.height - brickSize, brickSize, brickSize, '#00FF00', false);
-        this.player = new Sprite(5,5, brickSize-5, brickSize-5, '#FFFF00', true);
-        let col:number = 0;
-        let row:number = 0;
-        mazeData.forEach((bit) => {
-          if(bit === '1') {
-            const x:number = col * brickSize;
-            const y:number = row * brickSize;
-            bricks.push(new Sprite(x, y, brickSize, brickSize, '#2121DE',false));
-          }
-          col++
-          if(col >= numCols) {
-            col = 0
-            row++
-          }
-        });
+      this.canvas = <HTMLCanvasElement> document.getElementById('maze-canvas');
+      this.ctx = this.canvas.getContext('2d');
+      this.canvasBounds = [
+          new Sprite(-100, -100, 100, this.canvas.height + 100,'none', false),
+          new Sprite(-100, -100, this.canvas.width + 100, 100,'none',false),
+          new Sprite(this.canvas.width, -100, 100, this.canvas.height + 100,'none',false),
+          new Sprite(-100, this.canvas.height, this.canvas.width + 100, 100, 'none',false)
+      ];
+      const mazeData:Array<string> = document.querySelector('#maze-data').innerHTML.split('');
+      const bricks:Array<Sprite> = [];
+      const numCols:number = Math.sqrt(mazeData.length);
+      const brickSize:number = this.canvas.width / numCols;
+      this.winArea = new Sprite(this.canvas.width - brickSize, this.canvas.height - brickSize, brickSize, brickSize, '#00FF00', false);
+      this.player = new Sprite(5,5, brickSize-5, brickSize-5, '#FFFF00', true);
+      let col:number = 0;
+      let row:number = 0;
+      mazeData.forEach((bit) => {
+        if(bit === '1') {
+          const x:number = col * brickSize;
+          const y:number = row * brickSize;
+          bricks.push(new Sprite(x, y, brickSize - 1, brickSize - 1, '#2121DE',false));
+        }
+        col++;
+        if(col >= numCols) {
+          col = 0;
+          row++;
+        }
+      });
 
-        this.maze = bricks;
+      this.maze = bricks;
     }
 
     // Note: lamba syntax is required here to make sure the 'this' context persists through animation frames
@@ -236,7 +236,7 @@ class MazeGame {
    }
 }
 
-
+// Instantiate and run the game, and we're off to the races
 const game:MazeGame = new MazeGame();
 document.addEventListener('keydown', game.keyDownHandler, false);
 document.addEventListener('keyup', game.keyUpHandler, false);

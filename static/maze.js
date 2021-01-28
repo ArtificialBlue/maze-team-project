@@ -218,7 +218,7 @@ var MazeGame = /** @class */ (function () {
             if (bit === '1') {
                 var x = col * brickSize;
                 var y = row * brickSize;
-                bricks.push(new Sprite(x, y, brickSize, brickSize, '#2121DE', false));
+                bricks.push(new Sprite(x, y, brickSize - 1, brickSize - 1, '#2121DE', false));
             }
             col++;
             if (col >= numCols) {
@@ -230,6 +230,7 @@ var MazeGame = /** @class */ (function () {
     }
     return MazeGame;
 }());
+// Instantiate and run the game, and we're off to the races
 var game = new MazeGame();
 document.addEventListener('keydown', game.keyDownHandler, false);
 document.addEventListener('keyup', game.keyUpHandler, false);

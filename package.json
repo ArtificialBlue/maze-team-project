@@ -1,0 +1,23 @@
+{
+  "name": "maze-team-project",
+  "version": "1.0.0",
+  "description": "Website to generate random mazes, and allow you to solve them",
+  "main": "app.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && python3 app.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtificialBlue/maze-team-project.git"
+  },
+  "author": "Alexander Lopez, Ali Shah, Dino Martinez, Starlight Romero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArtificialBlue/maze-team-project/issues"
+  },
+  "homepage": "https://github.com/ArtificialBlue/maze-team-project#readme",
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}
