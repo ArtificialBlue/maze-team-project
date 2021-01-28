@@ -88,6 +88,15 @@ class Sprite {
       }
     }
 
+    updateVelocity(delta:Vector):Vector {
+      if(this.movable) {
+          const new_x = this.velocity.x + delta.x;
+          const new_y = this.velocity.y + delta.y;
+          this.velocity.update(new_x, new_y);
+          return this.velocity;
+      }
+    }
+
     // Check for collisions
     checkCollision(target:Sprite):boolean {
       if (this.position.x + this.size.x > target.position.x && this.position.x < target.position.x + target.size.x) {
@@ -114,6 +123,12 @@ class Sprite {
     // Updating position for sprite will utilize velocity
    move() {
      this.updatePosition(this.velocity);
+   }
+   moveX() {
+     this.updatePosition(new Vector(this.velocity.x, 0));
+   }
+   moveY() {
+     this.updatePosition(new Vector(0, this.velocity.y));
    }
 }
 
@@ -156,7 +171,7 @@ class MazeGame {
         }
       });
 
-      this.maze = bricks;
+      this.maze = [];
     }
 
     // Note: lamba syntax is required here to make sure the 'this' context persists through animation frames
@@ -176,7 +191,7 @@ class MazeGame {
       ctx.clearRect(player.x, player.y, player.size.x, player.size.y);
 
       // Move player, then check/handle collisions, then draw player
-      player.move();
+      player.moveX();
 
       canvasBounds.forEach((wall) => {
         if (player.checkCollision(wall)) {
@@ -190,6 +205,23 @@ class MazeGame {
           player.revertPosition();
         }
       });
+
+      player.moveY();
+
+      canvasBounds.forEach((wall) => {
+        if (player.checkCollision(wall)) {
+          player.revertPosition();
+        }
+      });
+
+      // Draw wall bricks
+      maze.forEach((brick) => {
+        if (player.checkCollision(brick)) {
+          player.revertPosition();
+        }
+      });
+
+
       player.draw(ctx);
 
       // Check win condition
@@ -205,32 +237,40 @@ class MazeGame {
 
     keyDownHandler = (e:KeyboardEvent):void => {
        if (e.key === 'd' || e.key === 'ArrowRight') {
-           this.player.velocity = new Vector(3, 0);
+         if (this.player.velocity.x <= 0) {
+           this.player.updateVelocity(new Vector(3, 0));
+         }
        } else if (e.key === 'a' || e.key === 'ArrowLeft') {
-           this.player.velocity = new Vector(-3, 0);
+         if (this.player.velocity.x >= 0) {
+           this.player.updateVelocity(new Vector(-3, 0));
+         }
        } else if (e.key === 'w' || e.key === 'ArrowUp') {
-           this.player.velocity = new Vector(0, -3);
+         if (this.player.velocity.y >= 0) {
+           this.player.updateVelocity(new Vector(0, -3));
+         }
        } else if (e.key === 's' || e.key === 'ArrowDown') {
-           this.player.velocity = new Vector(0, 3);
+         if (this.player.velocity.y <= 0) {
+           this.player.updateVelocity(new Vector(0, 3));
+         }
        }
    }
 
    keyUpHandler = (e:KeyboardEvent):void => {
        if (e.key === 'd' || e.key === 'ArrowRight') {
-           if (this.player.velocity.x > 0) {
-               this.player.velocity = new Vector(0, 0);
+           if (this.player.velocity.x >= 0) {
+             this.player.updateVelocity(new Vector(-3, 0));
            }
        } else if (e.key === 'a' || e.key === 'ArrowLeft') {
-           if (this.player.velocity.x < 0) {
-               this.player.velocity = new Vector(0, 0);
+           if (this.player.velocity.x <= 0) {
+             this.player.updateVelocity(new Vector(3, 0));
            }
        } else if (e.key === 'w' || e.key === 'ArrowUp') {
-           if (this.player.velocity.y < 0) {
-               this.player.velocity = new Vector(0, 0);
+           if (this.player.velocity.y <= 0) {
+             this.player.updateVelocity(new Vector(0, 3));
            }
        } else if (e.key === 's' || e.key === 'ArrowDown') {
-           if (this.player.velocity.y > 0) {
-               this.player.velocity = new Vector(0, 0);
+           if (this.player.velocity.y >= 0) {
+             this.player.updateVelocity(new Vector(0, -3));
            }
        }
    }

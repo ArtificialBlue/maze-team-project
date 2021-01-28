@@ -96,6 +96,14 @@ var Sprite = /** @class */ (function () {
             return this.position;
         }
     };
+    Sprite.prototype.updateVelocity = function (delta) {
+        if (this.movable) {
+            var new_x = this.velocity.x + delta.x;
+            var new_y = this.velocity.y + delta.y;
+            this.velocity.update(new_x, new_y);
+            return this.velocity;
+        }
+    };
     // Check for collisions
     Sprite.prototype.checkCollision = function (target) {
         if (this.position.x + this.size.x > target.position.x && this.position.x < target.position.x + target.size.x) {
@@ -120,6 +128,12 @@ var Sprite = /** @class */ (function () {
     Sprite.prototype.move = function () {
         this.updatePosition(this.velocity);
     };
+    Sprite.prototype.moveX = function () {
+        this.updatePosition(new Vector(this.velocity.x, 0));
+    };
+    Sprite.prototype.moveY = function () {
+        this.updatePosition(new Vector(0, this.velocity.y));
+    };
     return Sprite;
 }());
 var MazeGame = /** @class */ (function () {
@@ -138,7 +152,19 @@ var MazeGame = /** @class */ (function () {
             // Clear canvas for redrawing
             ctx.clearRect(player.x, player.y, player.size.x, player.size.y);
             // Move player, then check/handle collisions, then draw player
-            player.move();
+            player.moveX();
+            canvasBounds.forEach(function (wall) {
+                if (player.checkCollision(wall)) {
+                    player.revertPosition();
+                }
+            });
+            // Draw wall bricks
+            maze.forEach(function (brick) {
+                if (player.checkCollision(brick)) {
+                    player.revertPosition();
+                }
+            });
+            player.moveY();
             canvasBounds.forEach(function (wall) {
                 if (player.checkCollision(wall)) {
                     player.revertPosition();
@@ -164,37 +190,45 @@ var MazeGame = /** @class */ (function () {
         };
         this.keyDownHandler = function (e) {
             if (e.key === 'd' || e.key === 'ArrowRight') {
-                _this.player.velocity = new Vector(3, 0);
+                if (_this.player.velocity.x <= 0) {
+                    _this.player.updateVelocity(new Vector(3, 0));
+                }
             }
             else if (e.key === 'a' || e.key === 'ArrowLeft') {
-                _this.player.velocity = new Vector(-3, 0);
+                if (_this.player.velocity.x >= 0) {
+                    _this.player.updateVelocity(new Vector(-3, 0));
+                }
             }
             else if (e.key === 'w' || e.key === 'ArrowUp') {
-                _this.player.velocity = new Vector(0, -3);
+                if (_this.player.velocity.y >= 0) {
+                    _this.player.updateVelocity(new Vector(0, -3));
+                }
             }
             else if (e.key === 's' || e.key === 'ArrowDown') {
-                _this.player.velocity = new Vector(0, 3);
+                if (_this.player.velocity.y <= 0) {
+                    _this.player.updateVelocity(new Vector(0, 3));
+                }
             }
         };
         this.keyUpHandler = function (e) {
             if (e.key === 'd' || e.key === 'ArrowRight') {
-                if (_this.player.velocity.x > 0) {
-                    _this.player.velocity = new Vector(0, 0);
+                if (_this.player.velocity.x >= 0) {
+                    _this.player.updateVelocity(new Vector(-3, 0));
                 }
             }
             else if (e.key === 'a' || e.key === 'ArrowLeft') {
-                if (_this.player.velocity.x < 0) {
-                    _this.player.velocity = new Vector(0, 0);
+                if (_this.player.velocity.x <= 0) {
+                    _this.player.updateVelocity(new Vector(3, 0));
                 }
             }
             else if (e.key === 'w' || e.key === 'ArrowUp') {
-                if (_this.player.velocity.y < 0) {
-                    _this.player.velocity = new Vector(0, 0);
+                if (_this.player.velocity.y <= 0) {
+                    _this.player.updateVelocity(new Vector(0, 3));
                 }
             }
             else if (e.key === 's' || e.key === 'ArrowDown') {
-                if (_this.player.velocity.y > 0) {
-                    _this.player.velocity = new Vector(0, 0);
+                if (_this.player.velocity.y >= 0) {
+                    _this.player.updateVelocity(new Vector(0, -3));
                 }
             }
         };
@@ -226,7 +260,7 @@ var MazeGame = /** @class */ (function () {
                 row++;
             }
         });
-        this.maze = bricks;
+        this.maze = [];
     }
     return MazeGame;
 }());
