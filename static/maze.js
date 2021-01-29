@@ -260,7 +260,7 @@ var MazeGame = /** @class */ (function () {
                 row++;
             }
         });
-        this.maze = [];
+        this.maze = bricks;
     }
     return MazeGame;
 }());

@@ -171,7 +171,7 @@ class MazeGame {
         }
       });
 
-      this.maze = [];
+      this.maze = bricks;
     }
 
     // Note: lamba syntax is required here to make sure the 'this' context persists through animation frames
