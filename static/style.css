@@ -49,9 +49,24 @@ footer p {
 #maze-container a {
   text-decoration: none;
   color: var(--color-primary);
+  position:relative;
 }
 #maze-container a:hover {
   color: var(--color-gradient-primary);
+}
+#next-arrow, #prev-arrow {
+  transition: all .2s ease;
+  position: absolute;
+  bottom:0;
+}
+#prev-arrow {
+  left: -17px;
+}
+#maze-container a:hover #next-arrow {
+  margin-left:15px;
+}
+#maze-container a:hover #prev-arrow {
+  left:-32px;
 }
 
 h1 {
