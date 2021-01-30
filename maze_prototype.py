@@ -15,7 +15,7 @@ def printMaze(maze,height, width):
 		for j in range(0, width):
 		    print(str(maze[i][j]), end="")
 			
-#		print('\n')
+		print('\n')
 
 # Find number of surrounding cells
 def surroundingCells(rand_wall):
@@ -241,3 +241,5 @@ def createMaze(height,width):
             maze[height-1][i] = '0'
             break
     return printMaze(maze,height,width)
+
+#createMaze(10,10)
