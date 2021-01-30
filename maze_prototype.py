@@ -11,25 +11,25 @@ unvisited = 'u'
 
 ## Functions
 def printMaze(maze,height, width):
-	for i in range(0, height):
-		for j in range(0, width):
-		    print(str(maze[i][j]), end="")
-			
-		print('\n')
+    for i in range(0, height):
+        for j in range(0, width):
+            print(str(maze[i][j]), end="")
+
+        print('\n')
 
 # Find number of surrounding cells
 def surroundingCells(rand_wall):
-	s_cells = 0
-	if (maze[rand_wall[0]-1][rand_wall[1]] == '0'):
-		s_cells += 1
-	if (maze[rand_wall[0]+1][rand_wall[1]] == '0'):
-		s_cells += 1
-	if (maze[rand_wall[0]][rand_wall[1]-1] == '0'):
-		s_cells +=1
-	if (maze[rand_wall[0]][rand_wall[1]+1] == '0'):
-		s_cells += 1
+    s_cells = 0
+    if (maze[rand_wall[0]-1][rand_wall[1]] == '0'):
+        s_cells += 1
+    if (maze[rand_wall[0]+1][rand_wall[1]] == '0'):
+        s_cells += 1
+    if (maze[rand_wall[0]][rand_wall[1]-1] == '0'):
+        s_cells +=1
+    if (maze[rand_wall[0]][rand_wall[1]+1] == '0'):
+        s_cells += 1
 
-	return s_cells
+    return s_cells
 
 
 
@@ -180,7 +180,6 @@ def createMaze(height,width):
                 for wall in walls:
                     if (wall[0] == rand_wall[0] and wall[1] == rand_wall[1]):
                         walls.remove(wall)
-
 
                 continue
 
