@@ -189,46 +189,48 @@ var MazeGame = /** @class */ (function () {
             }
         };
         this.keyDownHandler = function (e) {
+            var _a = _this, player = _a.player, speed = _a.speed;
             if (e.key === 'd' || e.key === 'ArrowRight') {
                 if (_this.player.velocity.x <= 0) {
-                    _this.player.updateVelocity(new Vector(3, 0));
+                    player.updateVelocity(new Vector(speed, 0));
                 }
             }
             else if (e.key === 'a' || e.key === 'ArrowLeft') {
-                if (_this.player.velocity.x >= 0) {
-                    _this.player.updateVelocity(new Vector(-3, 0));
+                if (player.velocity.x >= 0) {
+                    player.updateVelocity(new Vector(-speed, 0));
                 }
             }
             else if (e.key === 'w' || e.key === 'ArrowUp') {
-                if (_this.player.velocity.y >= 0) {
-                    _this.player.updateVelocity(new Vector(0, -3));
+                if (player.velocity.y >= 0) {
+                    player.updateVelocity(new Vector(0, -speed));
                 }
             }
             else if (e.key === 's' || e.key === 'ArrowDown') {
-                if (_this.player.velocity.y <= 0) {
-                    _this.player.updateVelocity(new Vector(0, 3));
+                if (player.velocity.y <= 0) {
+                    player.updateVelocity(new Vector(0, speed));
                 }
             }
         };
         this.keyUpHandler = function (e) {
+            var _a = _this, player = _a.player, speed = _a.speed;
             if (e.key === 'd' || e.key === 'ArrowRight') {
-                if (_this.player.velocity.x >= 0) {
-                    _this.player.updateVelocity(new Vector(-3, 0));
+                if (player.velocity.x >= 0) {
+                    player.updateVelocity(new Vector(-speed, 0));
                 }
             }
             else if (e.key === 'a' || e.key === 'ArrowLeft') {
-                if (_this.player.velocity.x <= 0) {
-                    _this.player.updateVelocity(new Vector(3, 0));
+                if (player.velocity.x <= 0) {
+                    player.updateVelocity(new Vector(speed, 0));
                 }
             }
             else if (e.key === 'w' || e.key === 'ArrowUp') {
-                if (_this.player.velocity.y <= 0) {
-                    _this.player.updateVelocity(new Vector(0, 3));
+                if (player.velocity.y <= 0) {
+                    player.updateVelocity(new Vector(0, speed));
                 }
             }
             else if (e.key === 's' || e.key === 'ArrowDown') {
-                if (_this.player.velocity.y >= 0) {
-                    _this.player.updateVelocity(new Vector(0, -3));
+                if (player.velocity.y >= 0) {
+                    player.updateVelocity(new Vector(0, -speed));
                 }
             }
         };
@@ -246,6 +248,8 @@ var MazeGame = /** @class */ (function () {
         var brickSize = this.canvas.width / numCols;
         this.winArea = new Sprite(this.canvas.width - brickSize, this.canvas.height - brickSize, brickSize, brickSize, '#00FF00', false);
         this.player = new Sprite(5, 5, brickSize - 5, brickSize - 5, '#FFFF00', true);
+        // define player speed
+        this.speed = 5;
         var col = 0;
         var row = 0;
         mazeData.forEach(function (bit) {
