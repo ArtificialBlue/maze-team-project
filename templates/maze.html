@@ -5,10 +5,11 @@
 <h1>Level {{ level }}</h1>
 
 <section id="maze-container">
+  <a id='prev' href="/maze/{{level - 1}}">&lt; Back</a>
   <canvas id="maze-canvas" width=400 height=400></canvas>
-  <p id="maze-data">{{ maze_data }}</p>
+  <a id='next' href="/maze/{{level + 1}}">Next &gt;</a>
 </section>
-
+<p id="maze-data">{{ maze_data }}</p>
 <script src="/static/maze.js"></script>
 
 {% endblock content %}
