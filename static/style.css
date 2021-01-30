@@ -1,3 +1,11 @@
+:root {
+  --color-primary: #BE231D;
+  --color-secondary: #141414;
+  --color-gradient-primary: #811A16;
+  --color-gradient-secondary: #1f1f1f;
+}
+
+
 html, body {
   height: 100%;
 }
@@ -9,28 +17,41 @@ body {
 }
 
 body {
-  background: #141414;
-  color: #BE231D;
+  background: radial-gradient(circle, var(--color-secondary), var(--color-gradient-secondary));
+  color: var(--color-primary);
   text-align: center;
   font-family: 'Press Start 2P', cursive;
   margin:0;
 }
 
 header, footer {
-  background:#BE231D;
-  color: #141414;
+  /*#811A16*/
+  background:linear-gradient(to right, var(--color-primary), var(--color-gradient-primary));
+  background-size: 400% 400%;
+  color: var(--color-secondary);
   padding-top: 24px;
   padding-bottom: 24px;
+  animation: header-scroll 5s linear 2s infinite alternate;
 }
 
 header a {
   text-decoration: none;
-  color: #141414;
+  color: var(--color-secondary);
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 footer p {
   margin: 0;
   padding: 0;
+}
+
+#maze-container a {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+#maze-container a:hover {
+  color: var(--color-gradient-primary);
 }
 
 h1 {
@@ -44,4 +65,16 @@ h1 {
 
 #maze-data {
   display: none;
+}
+
+@keyframes header-scroll {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }

@@ -30,8 +30,9 @@ def about():
 @app.route('/maze/<level>')
 def maze(level):
     """Main game page."""
+    # if level < 0 or > max, redirect to level 0
     context = {
-        'level': level,
+        'level': int(level),
         'maze_data': get_maze(level)
     }
     return render_template('maze.html', **context)

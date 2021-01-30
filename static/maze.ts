@@ -140,6 +140,7 @@ class MazeGame {
     maze:Array<Sprite>;
     player:Sprite;
     winArea:Sprite;
+    speed:number;
 
     constructor() {
       this.canvas = <HTMLCanvasElement> document.getElementById('maze-canvas');
@@ -156,6 +157,8 @@ class MazeGame {
       const brickSize:number = this.canvas.width / numCols;
       this.winArea = new Sprite(this.canvas.width - brickSize, this.canvas.height - brickSize, brickSize, brickSize, '#00FF00', false);
       this.player = new Sprite(5,5, brickSize-5, brickSize-5, '#FFFF00', true);
+      // define player speed
+      this.speed = 5;
       let col:number = 0;
       let row:number = 0;
       mazeData.forEach((bit) => {
@@ -236,44 +239,46 @@ class MazeGame {
     }
 
     keyDownHandler = (e:KeyboardEvent):void => {
-       if (e.key === 'd' || e.key === 'ArrowRight') {
-         if (this.player.velocity.x <= 0) {
-           this.player.updateVelocity(new Vector(3, 0));
-         }
-       } else if (e.key === 'a' || e.key === 'ArrowLeft') {
-         if (this.player.velocity.x >= 0) {
-           this.player.updateVelocity(new Vector(-3, 0));
-         }
-       } else if (e.key === 'w' || e.key === 'ArrowUp') {
-         if (this.player.velocity.y >= 0) {
-           this.player.updateVelocity(new Vector(0, -3));
-         }
-       } else if (e.key === 's' || e.key === 'ArrowDown') {
-         if (this.player.velocity.y <= 0) {
-           this.player.updateVelocity(new Vector(0, 3));
-         }
-       }
+      const {player, speed} = this
+      if (e.key === 'd' || e.key === 'ArrowRight') {
+        if (this.player.velocity.x <= 0) {
+          player.updateVelocity(new Vector(speed, 0));
+        }
+      } else if (e.key === 'a' || e.key === 'ArrowLeft') {
+        if (player.velocity.x >= 0) {
+          player.updateVelocity(new Vector(-speed, 0));
+        }
+      } else if (e.key === 'w' || e.key === 'ArrowUp') {
+        if (player.velocity.y >= 0) {
+          player.updateVelocity(new Vector(0, -speed));
+        }
+      } else if (e.key === 's' || e.key === 'ArrowDown') {
+        if (player.velocity.y <= 0) {
+          player.updateVelocity(new Vector(0, speed));
+        }
+      }
    }
 
-   keyUpHandler = (e:KeyboardEvent):void => {
-       if (e.key === 'd' || e.key === 'ArrowRight') {
-           if (this.player.velocity.x >= 0) {
-             this.player.updateVelocity(new Vector(-3, 0));
-           }
-       } else if (e.key === 'a' || e.key === 'ArrowLeft') {
-           if (this.player.velocity.x <= 0) {
-             this.player.updateVelocity(new Vector(3, 0));
-           }
-       } else if (e.key === 'w' || e.key === 'ArrowUp') {
-           if (this.player.velocity.y <= 0) {
-             this.player.updateVelocity(new Vector(0, 3));
-           }
-       } else if (e.key === 's' || e.key === 'ArrowDown') {
-           if (this.player.velocity.y >= 0) {
-             this.player.updateVelocity(new Vector(0, -3));
-           }
-       }
-   }
+    keyUpHandler = (e:KeyboardEvent):void => {
+      const {player, speed} = this
+      if (e.key === 'd' || e.key === 'ArrowRight') {
+         if (player.velocity.x >= 0) {
+            player.updateVelocity(new Vector(-speed, 0));
+         }
+      } else if (e.key === 'a' || e.key === 'ArrowLeft') {
+        if (player.velocity.x <= 0) {
+          player.updateVelocity(new Vector(speed, 0));
+        }
+      } else if (e.key === 'w' || e.key === 'ArrowUp') {
+        if (player.velocity.y <= 0) {
+          player.updateVelocity(new Vector(0, speed));
+        }
+      } else if (e.key === 's' || e.key === 'ArrowDown') {
+        if (player.velocity.y >= 0) {
+          player.updateVelocity(new Vector(0, -speed));
+        }
+      }
+    }
 }
 
 // Instantiate and run the game, and we're off to the races
