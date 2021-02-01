@@ -1,5 +1,4 @@
 import random
-import time
 
 ## Main code
 # Init variables
@@ -8,18 +7,20 @@ cell = '0'
 maze = []
 unvisited = 'u'
 
-
 ## Functions
 def printMaze(maze,height, width):
+    bitstring = ""
     for i in range(0, height):
         for j in range(0, width):
-            print(str(maze[i][j]), end="")
+            bitstring += str(maze[i][j])
+        # print('\n')
 
-        print('\n')
+    return "0" + bitstring[1:-1] + "0"
 
 # Find number of surrounding cells
 def surroundingCells(rand_wall):
     s_cells = 0
+
     if (maze[rand_wall[0]-1][rand_wall[1]] == '0'):
         s_cells += 1
     if (maze[rand_wall[0]+1][rand_wall[1]] == '0'):
@@ -31,9 +32,7 @@ def surroundingCells(rand_wall):
 
     return s_cells
 
-
-
-def createMaze(height,width):
+def createMaze(height, width):
     # Denote all cells as unvisited
     for i in range(0, height):
         line = []
@@ -89,7 +88,6 @@ def createMaze(height,width):
                         if ([rand_wall[0]-1, rand_wall[1]] not in walls):
                             walls.append([rand_wall[0]-1, rand_wall[1]])
 
-
                     # Bottom cell
                     if (rand_wall[0] != height-1):
                         if (maze[rand_wall[0]+1][rand_wall[1]] != '0'):
@@ -103,7 +101,6 @@ def createMaze(height,width):
                             maze[rand_wall[0]][rand_wall[1]-1] = '1'
                         if ([rand_wall[0], rand_wall[1]-1] not in walls):
                             walls.append([rand_wall[0], rand_wall[1]-1])
-                
 
                 # Delete wall
                 for wall in walls:
@@ -220,8 +217,6 @@ def createMaze(height,width):
         for wall in walls:
             if (wall[0] == rand_wall[0] and wall[1] == rand_wall[1]):
                 walls.remove(wall)
-        
-
 
     # Mark the remaining unvisited cells as walls
     for i in range(0, height):
@@ -239,6 +234,5 @@ def createMaze(height,width):
         if (maze[height-2][i] == '0'):
             maze[height-1][i] = '0'
             break
-    return printMaze(maze,height,width)
 
-#createMaze(10,10)
+    return printMaze(maze, height, width)
