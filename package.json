@@ -4,7 +4,7 @@
   "description": "Website to generate random mazes, and allow you to solve them",
   "main": "app.py",
   "scripts": {
-    "test": "pytest",
+    "test": "jest && pytest",
     "start": "tsc && python3 app.py"
   },
   "repository": {
