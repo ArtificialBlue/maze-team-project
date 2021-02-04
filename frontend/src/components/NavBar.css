@@ -2,7 +2,7 @@
   color: var(--color);
 }
 .active-link {
-  color: var(--ion-color-primary);
+  color: var(--color-gradient-primary);
 }
 .nav-container {
   display: flex;

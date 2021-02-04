@@ -7,6 +7,11 @@ http://ionicframework.com/docs/theming/ */
 
 :root {
   --ion-font-family: 'Press Start 2P', cursive !important;
+  --color-primary: #000;
+  --color-secondary: #141414;
+  --color-maze-background: #8e8e8e;
+  --color-gradient-primary: #0040f5;
+  --ion-background-color: #ededed;
 
   /** primary **/
   --ion-color-primary: #3880ff;
@@ -88,6 +93,12 @@ http://ionicframework.com/docs/theming/ */
    */
 
   body {
+    --color-primary: #be231d;
+    --color-secondary: #141414;
+    --color-gradient-secondary: #1f1f1f;
+
+    --color-maze-background: transparent;
+
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66, 140, 255;
     --ion-color-primary-contrast: #ffffff;
