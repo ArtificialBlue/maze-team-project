@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButtons,
-  IonBackButton,
-} from '@ionic/react'
+import { IonHeader, IonToolbar, IonTitle } from '@ionic/react'
 import { NavLink } from 'react-router-dom'
 import './NavBar.css'
 
