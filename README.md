@@ -25,4 +25,4 @@ If you're interested in adding/improving a feature to the project, follow these 
 ## Roadmap:
 | Skateboard (1 feature) | Bike (2nd feature)     | Car (Extras)           |
 | :--------------------- | :--------------------- | :--------------------- |
-| Route a single, static maze to the front end, and make it playable | Randomly generate mazes on the fly, and deliver those instead of the static one | Maybe other games? Maybe multiplayer? Maybe 3D? Maybe angled walls? |
+| Route a single, static maze to the front end, and make it playable | Randomly generate mazes on the fly, and deliver those instead of the static one | * Device Web Responsiveness with Ionic * Cross-Platform function with App through CapacitorJS * Multiplayer with Leaderboard through Web-Socket  |
