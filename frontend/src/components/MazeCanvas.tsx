@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import './MazeCanvas.css'
 
 import MazeGame from '../static/maze'
@@ -6,20 +6,9 @@ import MazeGame from '../static/maze'
 const MazeCanvas: React.FC = () => {
   const canvasRef = useRef(null)
   let game: MazeGame | null = null
+  const [bitstring, setBitstring] = useState('')
 
-  useEffect(() => {
-    const bitstring =
-      '0000010100000001010000000101000000010100000001010000000101000000010100000001010000000101000000000000'
-    game = new MazeGame(canvasRef.current!, bitstring.split(''))
-    document.addEventListener('keyup', game.keyUpHandler, false)
-    document.addEventListener('keydown', game.keyDownHandler, false)
-  }, [canvasRef])
-
-  useEffect(() => {
-    if (game !== null) game.start()
-  }, [])
-
-  useEffect(() => {
+  const start = () => {
     let animationFrameId = 0
 
     //Our draw came here
@@ -40,7 +29,28 @@ const MazeCanvas: React.FC = () => {
     return () => {
       window.cancelAnimationFrame(animationFrameId)
     }
-  }, [game])
+  }
+
+  useEffect(() => {
+    const loadBitstring = async () => {
+      const res = await fetch(`http://0.0.0.0:5000/1`)
+      const data = await res.json()
+      setBitstring(data.maze_data)
+    }
+
+    loadBitstring()
+  }, [])
+
+  useEffect(() => {
+    if (bitstring !== '') {
+      game = new MazeGame(canvasRef.current!, bitstring.split(''))
+      game.setup()
+      document.addEventListener('keyup', game.keyUpHandler, false)
+      document.addEventListener('keydown', game.keyDownHandler, false)
+      start()
+    }
+  }, [canvasRef, bitstring])
+
   return <canvas ref={canvasRef} />
 }
 

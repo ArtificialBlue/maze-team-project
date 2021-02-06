@@ -104,6 +104,10 @@ class Sprite {
     }
   }
 
+  setColor(color: string): void {
+    this.color = color
+  }
+
   // Check for collisions
   checkCollision(target: Sprite): boolean {
     if (
@@ -155,9 +159,11 @@ class MazeGame {
   winArea: Sprite
   speed: number
   isWon: boolean
+  theme: string
 
   constructor(canvas: HTMLCanvasElement, mazeData: Array<string>) {
-    console.log('Building canvas...')
+    const style = getComputedStyle(document.body)
+    this.theme = style.getPropertyValue('--device-theme')
     this.canvas = canvas!
     this.canvas.width = 400
     this.canvas.height = 400
@@ -190,7 +196,7 @@ class MazeGame {
       this.canvas.height - brickSize,
       brickSize,
       brickSize,
-      '#00FF00',
+      style.getPropertyValue('--color-maze-winarea'),
       false
     )
     this.player = new Sprite(
@@ -198,7 +204,7 @@ class MazeGame {
       5,
       brickSize - 5,
       brickSize - 5,
-      '#FFFF00',
+      style.getPropertyValue('--color-maze-player'),
       true
     )
     // define player speed
@@ -210,7 +216,14 @@ class MazeGame {
         const x: number = col * brickSize
         const y: number = row * brickSize
         bricks.push(
-          new Sprite(x, y, brickSize - 1, brickSize - 1, '#2121DE', false)
+          new Sprite(
+            x,
+            y,
+            brickSize - 1,
+            brickSize - 1,
+            style.getPropertyValue('--color-maze-bricks'),
+            false
+          )
         )
       }
       col++
@@ -225,7 +238,7 @@ class MazeGame {
   }
 
   // Note: lamba syntax is required here to make sure the 'this' context persists through animation frames
-  start = (): void => {
+  setup = (): void => {
     this.maze.forEach((brick) => {
       brick.draw(this.ctx)
     })
@@ -234,9 +247,26 @@ class MazeGame {
   }
 
   animationLoop = (): void => {
-    const { ctx, maze, player, animationLoop, canvasBounds, winArea } = this
+    const { ctx, maze, player, canvasBounds, winArea } = this
+    const style = getComputedStyle(document.body)
+
     // Clear canvas for redrawing
     ctx.clearRect(player.x, player.y, player.size.x, player.size.y)
+
+    // Update colors on theme change
+    if (style.getPropertyValue('--device-theme') !== this.theme) {
+      player.setColor(style.getPropertyValue('--color-maze-player'))
+      winArea.setColor(style.getPropertyValue('--color-maze-winarea'))
+      ctx.clearRect(winArea.x, winArea.y, winArea.size.x, winArea.size.y)
+      winArea.draw(ctx)
+      maze.forEach((brick) => {
+        // Set brick color
+        brick.setColor(style.getPropertyValue('--color-maze-bricks'))
+        ctx.clearRect(brick.x, brick.y, brick.size.x, brick.size.y)
+        brick.draw(ctx)
+      })
+      this.theme = style.getPropertyValue('--device-theme')
+    }
 
     // Move player, then check/handle collisions, then draw player
     player.moveX()
@@ -249,6 +279,8 @@ class MazeGame {
 
     // Draw wall bricks
     maze.forEach((brick) => {
+      // Set brick color
+      brick.setColor(style.getPropertyValue('--color-maze-bricks'))
       if (player.checkCollision(brick)) {
         player.revertPosition()
       }
@@ -264,6 +296,7 @@ class MazeGame {
 
     // Draw wall bricks
     maze.forEach((brick) => {
+      brick.setColor(style.getPropertyValue('--color-maze-bricks'))
       if (player.checkCollision(brick)) {
         player.revertPosition()
       }
@@ -280,19 +313,20 @@ class MazeGame {
 
   keyDownHandler = (e: KeyboardEvent): void => {
     const { player, speed } = this
-    if (e.key === 'd' || e.key === 'ArrowRight') {
+    const key = e.key.toLowerCase()
+    if (key === 'd' || key === 'arrowright') {
       if (this.player.velocity.x <= 0) {
         player.updateVelocity(new Vector(speed, 0))
       }
-    } else if (e.key === 'a' || e.key === 'ArrowLeft') {
+    } else if (key === 'a' || key === 'arrowleft') {
       if (player.velocity.x >= 0) {
         player.updateVelocity(new Vector(-speed, 0))
       }
-    } else if (e.key === 'w' || e.key === 'ArrowUp') {
+    } else if (key === 'w' || key === 'arrowup') {
       if (player.velocity.y >= 0) {
         player.updateVelocity(new Vector(0, -speed))
       }
-    } else if (e.key === 's' || e.key === 'ArrowDown') {
+    } else if (key === 's' || key === 'arrowdown') {
       if (player.velocity.y <= 0) {
         player.updateVelocity(new Vector(0, speed))
       }

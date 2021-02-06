@@ -9,8 +9,12 @@ http://ionicframework.com/docs/theming/ */
   --ion-font-family: 'Press Start 2P', cursive !important;
   --color-primary: #000;
   --color-secondary: #141414;
-  --color-maze-background: #8e8e8e;
+  --color-maze-background: #9bbc0f;
   --color-gradient-primary: #0040f5;
+  --device-theme: light;
+  --color-maze-player: #000000;
+  --color-maze-bricks: #222;
+  --color-maze-winarea: #555;
   --ion-background-color: #ededed;
 
   /** primary **/
@@ -98,6 +102,10 @@ http://ionicframework.com/docs/theming/ */
     --color-gradient-secondary: #1f1f1f;
 
     --color-maze-background: transparent;
+    --color-maze-player: #ffff00;
+    --color-maze-bricks: #0040f5;
+    --color-maze-winarea: #00ff00;
+    --device-theme: dark;
 
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66, 140, 255;
