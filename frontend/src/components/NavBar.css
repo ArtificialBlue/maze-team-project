@@ -1,0 +1,11 @@
+.nav-link {
+  color: var(--color);
+}
+.active-link {
+  color: var(--color-gradient-primary);
+}
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
