@@ -4,6 +4,7 @@ node_modules/
 
 # Frontend
 env/
+.eslintcache
 
 # Backend
 __pycache__/
