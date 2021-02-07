@@ -1,5 +1,7 @@
 """Random Maze Game (by Wildebeests)."""
 
+from maze_prototype import createMaze
+
 from flask import Flask, render_template
 app = Flask(__name__)
 
@@ -33,7 +35,8 @@ def maze(level):
     # if level < 0 or > max, redirect to level 0
     context = {
         'level': int(level),
-        'maze_data': get_maze(level)
+        'maze_data': createMaze(15, 15)
+        # 'maze_data': get_maze(level)
     }
     return render_template('maze.html', **context)
 
