@@ -33,9 +33,9 @@ const MazeCanvas: React.FC = () => {
 
   useEffect(() => {
     const loadBitstring = async () => {
-      const res = await fetch(`http://0.0.0.0:5000/1`)
+      const res = await fetch(`http://0.0.0.0:5000/api/`)
       const data = await res.json()
-      setBitstring(data.maze_data)
+      setBitstring(data.bitstring)
     }
 
     loadBitstring()
