@@ -43,7 +43,10 @@ def create_exit(maze, width, height):
     """Create maze exit."""
     for i in range(width - 1, 0, -1):
         if maze[height - 2][i] == "0":
-            maze[height - 1][i] = "0"
+            print("i", i)
+            for j in range(width - 1, i, -1):
+                print("j", j)
+                maze[height - 1][j] = "0"
             break
 
 
@@ -55,8 +58,7 @@ def create_entrance_exit(maze, width, height):
 
 def flatten_maze(maze):
     """Turn a 2D maze into a string."""
-    flat_maze = "".join(list(chain.from_iterable(maze)))
-    return "0" + flat_maze[1:-2] + "0"
+    return "".join(list(chain.from_iterable(maze)))
 
 
 def surrounding_cells(rand_wall):
