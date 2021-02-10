@@ -34,7 +34,8 @@ def create_entrance(maze, width):
     """Create maze entrance."""
     for i in range(0, width):
         if maze[1][i] == "0":
-            maze[0][i] = "0"
+            for j in range(0, i):
+                maze[0][j] = "0"
             break
 
 
