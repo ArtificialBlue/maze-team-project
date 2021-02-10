@@ -11,6 +11,13 @@ def init_maze(size):
         maze.append(line)
 
 
+def make_walls(width, height):
+    for i in range(0, height):
+        for j in range(0, width):
+            if maze[i][j] == "u":
+                maze[i][j] = "1"
+
+
 def delete_wall(walls, rand_wall):
     """Remove the processed cell from the wall list."""
     for wall in walls:
@@ -223,11 +230,7 @@ def createMaze(height, width):
             if wall[0] == rand_wall[0] and wall[1] == rand_wall[1]:
                 walls.remove(wall)
 
-    # Mark the remaining unvisited cells as walls
-    for i in range(0, height):
-        for j in range(0, width):
-            if maze[i][j] == "u":
-                maze[i][j] = "1"
+    make_walls(width, height)
 
     # Set entrance and exit
     for i in range(0, width):
