@@ -11,8 +11,9 @@ unvisited = "u"
 # Functions
 
 
-def flattenMaze(maze, height, width):
-    return "".join(list(chain.from_iterable(maze)))
+def flattenMaze(maze):
+    flat_maze = "".join(list(chain.from_iterable(maze)))
+    return "0" + flat_maze[1:-2] + "0"
 
 
 # Find number of surrounding cells
