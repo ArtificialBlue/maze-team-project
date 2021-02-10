@@ -4,10 +4,11 @@ from itertools import chain
 maze = []
 
 
-def flattenMaze(maze):
-    """Turn a 2D maze into a string."""
-    flat_maze = "".join(list(chain.from_iterable(maze)))
-    return "0" + flat_maze[1:-2] + "0"
+def init_maze(size):
+    """Initialize maze of given size."""
+    for i in range(0, size):
+        line = ["u"] * size
+        maze.append(line)
 
 
 def delete_wall(walls, rand_wall):
@@ -15,6 +16,12 @@ def delete_wall(walls, rand_wall):
     for wall in walls:
         if wall[0] == rand_wall[0] and wall[1] == rand_wall[1]:
             walls.remove(wall)
+
+
+def flattenMaze(maze):
+    """Turn a 2D maze into a string."""
+    flat_maze = "".join(list(chain.from_iterable(maze)))
+    return "0" + flat_maze[1:-2] + "0"
 
 
 def surroundingCells(rand_wall):
@@ -35,12 +42,8 @@ def surroundingCells(rand_wall):
 def createMaze(height, width):
     wall = "1"
     cell = "0"
-    unvisited = "u"
 
-    # Denote all cells as unvisited
-    for i in range(0, height):
-        line = [unvisited] * width
-        maze.append(line)
+    init_maze(height)
 
     # Randomize starting point and set it a cell
     starting_height = int(random.random() * height)
