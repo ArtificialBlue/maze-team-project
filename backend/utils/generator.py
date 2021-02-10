@@ -38,6 +38,7 @@ def createMaze(height, width):
         line = []
         for j in range(0, width):
             line.append(unvisited)
+        line = [unvisited] * width
         maze.append(line)
 
     # Randomize starting point and set it a cell
