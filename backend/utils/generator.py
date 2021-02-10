@@ -1,4 +1,5 @@
 import random
+from itertools import chain
 
 # Main code
 # Init variables
@@ -10,13 +11,8 @@ unvisited = "u"
 # Functions
 
 
-def printMaze(maze, height, width):
-    bitstring = ""
-    for i in range(0, height):
-        for j in range(0, width):
-            bitstring += str(maze[i][j])
-
-    return "0" + bitstring[1:-1] + "0"
+def flattenMaze(maze, height, width):
+    return "".join(list(chain.from_iterable(maze)))
 
 
 # Find number of surrounding cells
@@ -250,4 +246,7 @@ def createMaze(height, width):
             maze[height - 1][i] = "0"
             break
 
-    return printMaze(maze, height, width)
+    return flattenMaze(maze)
+
+
+print(createMaze(10, 10))
