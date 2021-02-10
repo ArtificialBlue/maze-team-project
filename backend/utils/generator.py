@@ -260,6 +260,3 @@ def generateMaze(height, width):
     create_entrance_exit(maze, width, height)
 
     return flatten_maze(maze)
-
-
-print(generateMaze(10, 10))
