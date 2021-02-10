@@ -181,9 +181,7 @@ def createMaze(height, width):
                             maze[rand_wall[0]][rand_wall[1] + 1] = "1"
                         if [rand_wall[0], rand_wall[1] + 1] not in walls:
                             walls.append([rand_wall[0], rand_wall[1] + 1])
-
                 delete_wall(walls, rand_wall)
-
                 continue
 
         # Check the bottom wall
@@ -214,9 +212,7 @@ def createMaze(height, width):
                             maze[rand_wall[0]][rand_wall[1] + 1] = "1"
                         if [rand_wall[0], rand_wall[1] + 1] not in walls:
                             walls.append([rand_wall[0], rand_wall[1] + 1])
-
                 delete_wall(walls, rand_wall)
-
                 continue
 
         # Check the right wall
@@ -247,28 +243,14 @@ def createMaze(height, width):
                             maze[rand_wall[0] - 1][rand_wall[1]] = "1"
                         if [rand_wall[0] - 1, rand_wall[1]] not in walls:
                             walls.append([rand_wall[0] - 1, rand_wall[1]])
-
                 delete_wall(walls, rand_wall)
-
                 continue
 
-        # Delete the wall from the list anyway
-        for wall in walls:
-            if wall[0] == rand_wall[0] and wall[1] == rand_wall[1]:
-                walls.remove(wall)
+        delete_wall(walls, rand_wall)
 
     make_walls(width, height)
 
-    # Set entrance and exit
-    for i in range(0, width):
-        if maze[1][i] == "0":
-            maze[0][i] = "0"
-            break
-
-    for i in range(width - 1, 0, -1):
-        if maze[height - 2][i] == "0":
-            maze[height - 1][i] = "0"
-            break
+    create_entrance_exit(maze, width, height)
 
     return flattenMaze(maze)
 
