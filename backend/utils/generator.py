@@ -52,13 +52,13 @@ def create_entrance_exit(maze, width, height):
     create_exit(maze, width, height)
 
 
-def flattenMaze(maze):
+def flatten_maze(maze):
     """Turn a 2D maze into a string."""
     flat_maze = "".join(list(chain.from_iterable(maze)))
     return "0" + flat_maze[1:-2] + "0"
 
 
-def surroundingCells(rand_wall):
+def surrounding_cells(rand_wall):
     s_cells = 0
 
     if maze[rand_wall[0] - 1][rand_wall[1]] == "0":
@@ -73,40 +73,7 @@ def surroundingCells(rand_wall):
     return s_cells
 
 
-def createMaze(height, width):
-    wall = "1"
-    cell = "0"
-
-    clear_maze(maze)
-
-    init_maze(height)
-
-    # Randomize starting point and set it a cell
-    starting_height = int(random.random() * height)
-    starting_width = int(random.random() * width)
-    if starting_height == 0:
-        starting_height += 1
-    if starting_height == height - 1:
-        starting_height -= 1
-    if starting_width == 0:
-        starting_width += 1
-    if starting_width == width - 1:
-        starting_width -= 1
-
-    # Mark it as cell and add surrounding walls to the list
-    maze[starting_height][starting_width] = cell
-    walls = []
-    walls.append([starting_height - 1, starting_width])
-    walls.append([starting_height, starting_width - 1])
-    walls.append([starting_height, starting_width + 1])
-    walls.append([starting_height + 1, starting_width])
-
-    # Denote walls in maze
-    maze[starting_height - 1][starting_width] = "1"
-    maze[starting_height][starting_width - 1] = "1"
-    maze[starting_height][starting_width + 1] = "1"
-    maze[starting_height + 1][starting_width] = "1"
-
+def create_maze(maze, width, height, walls):
     while walls:
         # Pick a random wall
         rand_wall = walls[int(random.random() * len(walls)) - 1]
@@ -118,7 +85,7 @@ def createMaze(height, width):
                 and maze[rand_wall[0]][rand_wall[1] + 1] == "0"
             ):
                 # Find the number of surrounding cells
-                s_cells = surroundingCells(rand_wall)
+                s_cells = surrounding_cells(rand_wall)
 
                 if s_cells < 2:
                     # Denote the new path
@@ -155,7 +122,7 @@ def createMaze(height, width):
                 and maze[rand_wall[0] + 1][rand_wall[1]] == "0"
             ):
 
-                s_cells = surroundingCells(rand_wall)
+                s_cells = surrounding_cells(rand_wall)
                 if s_cells < 2:
                     # Denote the new path
                     maze[rand_wall[0]][rand_wall[1]] = "0"
@@ -191,7 +158,7 @@ def createMaze(height, width):
                 and maze[rand_wall[0] - 1][rand_wall[1]] == "0"
             ):
 
-                s_cells = surroundingCells(rand_wall)
+                s_cells = surrounding_cells(rand_wall)
                 if s_cells < 2:
                     # Denote the new path
                     maze[rand_wall[0]][rand_wall[1]] = "0"
@@ -222,7 +189,7 @@ def createMaze(height, width):
                 and maze[rand_wall[0]][rand_wall[1] - 1] == "0"
             ):
 
-                s_cells = surroundingCells(rand_wall)
+                s_cells = surrounding_cells(rand_wall)
                 if s_cells < 2:
                     # Denote the new path
                     maze[rand_wall[0]][rand_wall[1]] = "0"
@@ -248,11 +215,48 @@ def createMaze(height, width):
 
         delete_wall(walls, rand_wall)
 
+
+def generateMaze(height, width):
+    wall = "1"
+    cell = "0"
+
+    clear_maze(maze)
+
+    init_maze(height)
+
+    # Randomize starting point and set it a cell
+    starting_height = int(random.random() * height)
+    starting_width = int(random.random() * width)
+    if starting_height == 0:
+        starting_height += 1
+    if starting_height == height - 1:
+        starting_height -= 1
+    if starting_width == 0:
+        starting_width += 1
+    if starting_width == width - 1:
+        starting_width -= 1
+
+    # Mark it as cell and add surrounding walls to the list
+    maze[starting_height][starting_width] = cell
+    walls = []
+    walls.append([starting_height - 1, starting_width])
+    walls.append([starting_height, starting_width - 1])
+    walls.append([starting_height, starting_width + 1])
+    walls.append([starting_height + 1, starting_width])
+
+    # Denote walls in maze
+    maze[starting_height - 1][starting_width] = "1"
+    maze[starting_height][starting_width - 1] = "1"
+    maze[starting_height][starting_width + 1] = "1"
+    maze[starting_height + 1][starting_width] = "1"
+
+    create_maze(maze, width, height, walls)
+
     make_walls(width, height)
 
     create_entrance_exit(maze, width, height)
 
-    return flattenMaze(maze)
+    return flatten_maze(maze)
 
 
-print(createMaze(10, 10))
+print(generateMaze(10, 10))
