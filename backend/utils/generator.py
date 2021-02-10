@@ -34,8 +34,7 @@ def create_entrance(maze, width):
     """Create maze entrance."""
     for i in range(0, width):
         if maze[1][i] == "0":
-            for j in range(0, i):
-                maze[0][j] = "0"
+            maze[0][i] = "2"
             break
 
 
@@ -43,10 +42,7 @@ def create_exit(maze, width, height):
     """Create maze exit."""
     for i in range(width - 1, 0, -1):
         if maze[height - 2][i] == "0":
-            print("i", i)
-            for j in range(width - 1, i, -1):
-                print("j", j)
-                maze[height - 1][j] = "0"
+            maze[height - 1][i] = "2"
             break
 
 
@@ -260,3 +256,6 @@ def generateMaze(height, width):
     create_entrance_exit(maze, width, height)
 
     return flatten_maze(maze)
+
+
+print(generateMaze(10, 10))
