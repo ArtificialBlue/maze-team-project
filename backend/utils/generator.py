@@ -1,17 +1,11 @@
 import random
 from itertools import chain
 
-# Main code
-# Init variables
-wall = "1"
-cell = "0"
 maze = []
-unvisited = "u"
-
-# Functions
 
 
 def flattenMaze(maze):
+    """Turn a 2D maze into a string."""
     flat_maze = "".join(list(chain.from_iterable(maze)))
     return "0" + flat_maze[1:-2] + "0"
 
@@ -35,6 +29,10 @@ def surroundingCells(rand_wall):
 
 
 def createMaze(height, width):
+    wall = "1"
+    cell = "0"
+    unvisited = "u"
+
     # Denote all cells as unvisited
     for i in range(0, height):
         line = [unvisited] * width
