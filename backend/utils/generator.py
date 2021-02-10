@@ -4,6 +4,11 @@ from itertools import chain
 maze = []
 
 
+def clear_maze(maze):
+    maze = []
+    return maze
+
+
 def init_maze(size):
     """Initialize maze of given size."""
     for i in range(0, size):
@@ -23,6 +28,28 @@ def delete_wall(walls, rand_wall):
     for wall in walls:
         if wall[0] == rand_wall[0] and wall[1] == rand_wall[1]:
             walls.remove(wall)
+
+
+def create_entrance(maze, width):
+    """Create maze entrance."""
+    for i in range(0, width):
+        if maze[1][i] == "0":
+            maze[0][i] = "0"
+            break
+
+
+def create_exit(maze, width, height):
+    """Create maze exit."""
+    for i in range(width - 1, 0, -1):
+        if maze[height - 2][i] == "0":
+            maze[height - 1][i] = "0"
+            break
+
+
+def create_entrance_exit(maze, width, height):
+    """Create maze entrance and exit."""
+    create_entrance(maze, width)
+    create_exit(maze, width, height)
 
 
 def flattenMaze(maze):
@@ -49,6 +76,8 @@ def surroundingCells(rand_wall):
 def createMaze(height, width):
     wall = "1"
     cell = "0"
+
+    clear_maze(maze)
 
     init_maze(height)
 
@@ -116,9 +145,7 @@ def createMaze(height, width):
                             maze[rand_wall[0]][rand_wall[1] - 1] = "1"
                         if [rand_wall[0], rand_wall[1] - 1] not in walls:
                             walls.append([rand_wall[0], rand_wall[1] - 1])
-
                 delete_wall(walls, rand_wall)
-
                 continue
 
         # Check if it is an upper wall
