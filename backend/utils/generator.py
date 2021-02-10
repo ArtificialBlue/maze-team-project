@@ -10,7 +10,11 @@ def flattenMaze(maze):
     return "0" + flat_maze[1:-2] + "0"
 
 
-# Find number of surrounding cells
+def delete_wall(walls, rand_wall):
+    """Remove the processed cell from the wall list."""
+    for wall in walls:
+        if wall[0] == rand_wall[0] and wall[1] == rand_wall[1]:
+            walls.remove(wall)
 
 
 def surroundingCells(rand_wall):
@@ -103,10 +107,7 @@ def createMaze(height, width):
                         if [rand_wall[0], rand_wall[1] - 1] not in walls:
                             walls.append([rand_wall[0], rand_wall[1] - 1])
 
-                # Delete wall
-                for wall in walls:
-                    if wall[0] == rand_wall[0] and wall[1] == rand_wall[1]:
-                        walls.remove(wall)
+                delete_wall(walls, rand_wall)
 
                 continue
 
@@ -144,10 +145,7 @@ def createMaze(height, width):
                         if [rand_wall[0], rand_wall[1] + 1] not in walls:
                             walls.append([rand_wall[0], rand_wall[1] + 1])
 
-                # Delete wall
-                for wall in walls:
-                    if wall[0] == rand_wall[0] and wall[1] == rand_wall[1]:
-                        walls.remove(wall)
+                delete_wall(walls, rand_wall)
 
                 continue
 
@@ -180,10 +178,7 @@ def createMaze(height, width):
                         if [rand_wall[0], rand_wall[1] + 1] not in walls:
                             walls.append([rand_wall[0], rand_wall[1] + 1])
 
-                # Delete wall
-                for wall in walls:
-                    if wall[0] == rand_wall[0] and wall[1] == rand_wall[1]:
-                        walls.remove(wall)
+                delete_wall(walls, rand_wall)
 
                 continue
 
@@ -216,10 +211,7 @@ def createMaze(height, width):
                         if [rand_wall[0] - 1, rand_wall[1]] not in walls:
                             walls.append([rand_wall[0] - 1, rand_wall[1]])
 
-                # Delete wall
-                for wall in walls:
-                    if wall[0] == rand_wall[0] and wall[1] == rand_wall[1]:
-                        walls.remove(wall)
+                delete_wall(walls, rand_wall)
 
                 continue
 
