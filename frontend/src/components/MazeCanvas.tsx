@@ -33,7 +33,7 @@ const MazeCanvas: React.FC = () => {
 
   useEffect(() => {
     const loadBitstring = async () => {
-      const res = await fetch(`http://0.0.0.0:5000/api/`)
+      const res = await fetch(`http://localhost:5000/api/`)
       const data = await res.json()
       setBitstring(data.bitstring)
     }
