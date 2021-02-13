@@ -215,7 +215,7 @@ def create_maze(maze, width, height, walls):
         delete_wall(walls, rand_wall)
 
 
-def generateMaze(height, width):
+def generate_maze(height, width):
     wall = "1"
     cell = "0"
 
