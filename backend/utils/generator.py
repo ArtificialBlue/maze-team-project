@@ -4,13 +4,13 @@ from itertools import chain
 maze = []
 
 
-def clear_maze(maze):
-    maze = []
-    return maze
+def clear_maze():
+    maze.clear()
 
 
 def init_maze(size):
     """Initialize maze of given size."""
+    maze
     for i in range(0, size):
         line = ["u"] * size
         maze.append(line)
@@ -219,7 +219,7 @@ def generateMaze(height, width):
     wall = "1"
     cell = "0"
 
-    clear_maze(maze)
+    clear_maze()
 
     init_maze(height)
 
