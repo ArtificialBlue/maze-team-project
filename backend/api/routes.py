@@ -1,13 +1,11 @@
 from flask import Blueprint, jsonify
 from utils.generator import generate_maze
-# from utils.get_mz import get_mz
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
-@api.route('/')
-def getmaze():
+@api.route('/<size>')
+def getmaze(size):
     context = {
-        'bitstring': generate_maze(15, 15)
-        # 'bitstring': get_mz("0")
+        'bitstring': generate_maze(int(size), int(size))
     }
     return jsonify(context)
