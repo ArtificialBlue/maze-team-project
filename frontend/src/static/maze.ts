@@ -90,6 +90,12 @@ class Sprite {
     }
   }
 
+  setPosition(newPos: Vector): void {
+    if (this.movable) {
+      this.position.update(newPos.x, newPos.y)
+    }
+  }
+
   revertPosition(): void {
     if (this.movable) {
       this.position.update(this.prevPosition.x, this.prevPosition.y)
@@ -263,8 +269,8 @@ class MazeGame {
     ctx.clearRect(
       Math.floor(player.x),
       Math.floor(player.y),
-      player.size.x + 1,
-      player.size.y + 1
+      player.size.x,
+      player.size.y
     )
 
     // Update colors on theme change
@@ -294,7 +300,16 @@ class MazeGame {
     // Check wall brick collisions
     maze.forEach((brick) => {
       if (player.checkCollision(brick)) {
-        player.revertPosition()
+        //player.revertPosition()
+        if (player.velocity.x > 0) {
+          // player is moving rightward, move back to left side of wall
+          const newPos = new Vector(brick.x - player.size.x, player.y)
+          player.setPosition(newPos)
+        } else {
+          // player is moving leftward, move back to right side of wall
+          const newPos = new Vector(brick.x + brick.size.x, player.y)
+          player.setPosition(newPos)
+        }
       }
     })
 
@@ -309,7 +324,16 @@ class MazeGame {
     // Check wall bricks collisions
     maze.forEach((brick) => {
       if (player.checkCollision(brick)) {
-        player.revertPosition()
+        //player.revertPosition()
+        if (player.velocity.y > 0) {
+          // player is moving downward, move back to top side of wall
+          const newPos = new Vector(player.x, brick.y - player.size.y)
+          player.setPosition(newPos)
+        } else {
+          // player is moving upward, move back to bottom side of wall
+          const newPos = new Vector(player.x, brick.y + brick.size.y)
+          player.setPosition(newPos)
+        }
       }
     })
 
