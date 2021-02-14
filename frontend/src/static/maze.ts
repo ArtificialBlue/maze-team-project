@@ -126,9 +126,6 @@ class Sprite {
 
   // Render
   draw(ctx: CanvasRenderingContext2D): void {
-    const canvasWidth = ctx.canvas.clientWidth
-    const canvasHeight = ctx.canvas.clientHeight
-
     // Draw the object using our instance properties
     ctx.beginPath()
     ctx.rect(this.x, this.y, this.width, this.height)
@@ -200,15 +197,16 @@ class MazeGame {
       false
     )
     this.player = new Sprite(
-      5,
-      5,
-      brickSize - 5,
-      brickSize - 5,
+      0,
+      0,
+      brickSize * 0.75,
+      brickSize * 0.75,
       style.getPropertyValue('--color-maze-player'),
       true
     )
     // define player speed
-    this.speed = 5
+    this.speed = 4
+
     let col: number = 0
     let row: number = 0
     mazeData.forEach((bit) => {
@@ -277,10 +275,8 @@ class MazeGame {
       }
     })
 
-    // Draw wall bricks
+    // Check wall brick collisions
     maze.forEach((brick) => {
-      // Set brick color
-      brick.setColor(style.getPropertyValue('--color-maze-bricks'))
       if (player.checkCollision(brick)) {
         player.revertPosition()
       }
@@ -294,9 +290,8 @@ class MazeGame {
       }
     })
 
-    // Draw wall bricks
+    // Check wall bricks collisions
     maze.forEach((brick) => {
-      brick.setColor(style.getPropertyValue('--color-maze-bricks'))
       if (player.checkCollision(brick)) {
         player.revertPosition()
       }
