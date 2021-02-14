@@ -188,31 +188,23 @@ class MazeGame {
     const bricks: Array<Sprite> = []
     const numCols: number = Math.sqrt(mazeData.length)
     const brickSize: number = this.canvas.width / numCols
-    this.winArea = new Sprite(
-      this.canvas.width - brickSize,
-      this.canvas.height - brickSize,
-      brickSize,
-      brickSize,
-      style.getPropertyValue('--color-maze-winarea'),
-      false
-    )
-    this.player = new Sprite(
-      0,
-      0,
-      brickSize * 0.75,
-      brickSize * 0.75,
-      style.getPropertyValue('--color-maze-player'),
-      true
-    )
-    // define player speed
-    this.speed = 4
-
     let col: number = 0
     let row: number = 0
+    let winAreaPos = { x: 0, y: 0 }
+    let playerPos = { x: -10, y: 0 }
     mazeData.forEach((bit) => {
+      const x: number = col * brickSize
+      const y: number = row * brickSize
+      if (bit === '2') {
+        if (playerPos.x < 0) {
+          // Player has not been placed, meaning this is the first 2
+          playerPos = { x, y }
+        } else {
+          // Player has been placed, time to place win area
+          winAreaPos = { x, y }
+        }
+      }
       if (bit === '1') {
-        const x: number = col * brickSize
-        const y: number = row * brickSize
         bricks.push(
           new Sprite(
             x,
@@ -230,6 +222,25 @@ class MazeGame {
         row++
       }
     })
+
+    this.winArea = new Sprite(
+      winAreaPos.x,
+      winAreaPos.y,
+      brickSize,
+      brickSize,
+      style.getPropertyValue('--color-maze-winarea'),
+      false
+    )
+    this.player = new Sprite(
+      playerPos.x,
+      playerPos.y,
+      brickSize * 0.75,
+      brickSize * 0.75,
+      style.getPropertyValue('--color-maze-player'),
+      true
+    )
+    // define player speed
+    this.speed = 4
 
     this.maze = bricks
     this.isWon = false
@@ -249,7 +260,12 @@ class MazeGame {
     const style = getComputedStyle(document.body)
 
     // Clear canvas for redrawing
-    ctx.clearRect(player.x, player.y, player.size.x, player.size.y)
+    ctx.clearRect(
+      Math.floor(player.x),
+      Math.floor(player.y),
+      player.size.x + 1,
+      player.size.y + 1
+    )
 
     // Update colors on theme change
     if (style.getPropertyValue('--device-theme') !== this.theme) {
