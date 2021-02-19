@@ -298,11 +298,11 @@ class MazeGame {
         //player.revertPosition()
         if (player.velocity.x > 0) {
           // player is moving rightward, move back to left side of wall
-          const newPos = new Vector(brick.x - player.size.x, player.y)
+          const newPos = new Vector(brick.x - player.size.x - 1, player.y)
           player.setPosition(newPos)
-        } else {
+        } else if (player.velocity.x < 0) {
           // player is moving leftward, move back to right side of wall
-          const newPos = new Vector(brick.x + brick.size.x, player.y)
+          const newPos = new Vector(brick.x + brick.size.x + 1, player.y)
           player.setPosition(newPos)
         }
       }
@@ -322,11 +322,11 @@ class MazeGame {
         //player.revertPosition()
         if (player.velocity.y > 0) {
           // player is moving downward, move back to top side of wall
-          const newPos = new Vector(player.x, brick.y - player.size.y)
+          const newPos = new Vector(player.x, brick.y - player.size.y - 1)
           player.setPosition(newPos)
-        } else {
+        } else if (player.velocity.y < 0) {
           // player is moving upward, move back to bottom side of wall
-          const newPos = new Vector(player.x, brick.y + brick.size.y)
+          const newPos = new Vector(player.x, brick.y + brick.size.y + 1)
           player.setPosition(newPos)
         }
       }
