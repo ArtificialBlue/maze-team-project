@@ -31,8 +31,8 @@ class Vector {
 
   // Modifiers
   update(new_x: number, new_y: number): void {
-    this.x_component = new_x
-    this.y_component = new_y
+    this.x_component = Math.floor(new_x)
+    this.y_component = Math.floor(new_y)
   }
 }
 
@@ -238,10 +238,10 @@ class MazeGame {
       false
     )
     this.player = new Sprite(
-      playerPos.x,
-      playerPos.y,
-      brickSize * 0.75,
-      brickSize * 0.75,
+      Math.floor(playerPos.x),
+      Math.floor(playerPos.y),
+      Math.floor(brickSize * 0.75),
+      Math.floor(brickSize * 0.75),
       style.getPropertyValue('--color-maze-player'),
       true
     )
@@ -266,12 +266,7 @@ class MazeGame {
     const style = getComputedStyle(document.body)
 
     // Clear canvas for redrawing
-    ctx.clearRect(
-      Math.floor(player.x),
-      Math.floor(player.y),
-      player.size.x,
-      player.size.y
-    )
+    ctx.clearRect(player.x, player.y, player.size.x, player.size.y)
 
     // Update colors on theme change
     if (style.getPropertyValue('--device-theme') !== this.theme) {
@@ -345,6 +340,8 @@ class MazeGame {
       this.isWon = true
     }
   }
+
+  clear = () => {}
 
   keyDownHandler = (e: KeyboardEvent): void => {
     const { player, speed } = this
