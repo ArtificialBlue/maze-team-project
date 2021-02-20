@@ -3,8 +3,8 @@
     "static/js/0.ebb4eeb6.chunk.js": "/maze-team-project/static/js/0.ebb4eeb6.chunk.js",
     "static/js/0.ebb4eeb6.chunk.js.map": "/maze-team-project/static/js/0.ebb4eeb6.chunk.js.map",
     "main.css": "/maze-team-project/static/css/main.41d65802.chunk.css",
-    "main.js": "/maze-team-project/static/js/main.94b8bb5f.chunk.js",
-    "main.js.map": "/maze-team-project/static/js/main.94b8bb5f.chunk.js.map",
+    "main.js": "/maze-team-project/static/js/main.fa2938ae.chunk.js",
+    "main.js.map": "/maze-team-project/static/js/main.fa2938ae.chunk.js.map",
     "polyfills-dom.js": "/maze-team-project/static/js/polyfills-dom.f4f5d84a.chunk.js",
     "polyfills-dom.js.map": "/maze-team-project/static/js/polyfills-dom.f4f5d84a.chunk.js.map",
     "runtime-main.js": "/maze-team-project/static/js/runtime-main.2541d770.js",
@@ -133,6 +133,6 @@
     "static/css/4.5c58278c.chunk.css",
     "static/js/4.bd74b973.chunk.js",
     "static/css/main.41d65802.chunk.css",
-    "static/js/main.94b8bb5f.chunk.js"
+    "static/js/main.fa2938ae.chunk.js"
   ]
 }
