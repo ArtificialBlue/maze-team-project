@@ -6,3 +6,16 @@ canvas {
   border-radius: 5px;
   background: var(--color-maze-background);
 }
+.win-modal .ion-page {
+  padding: 36px;
+  line-height: 2;
+}
+ion-select {
+  border: 1px solid var(--color-gradient-primary);
+  width: fit-content;
+}
+.dropdown-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}

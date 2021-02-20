@@ -1,6 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react'
 import './MazeCanvas.css'
-import { IonSelect, IonSelectOption } from '@ionic/react'
+import {
+  IonSelect,
+  IonSelectOption,
+  IonModal,
+  IonButton,
+  IonContent,
+} from '@ionic/react'
 
 import MazeGame from '../static/maze'
 
@@ -9,7 +15,12 @@ const MazeCanvas: React.FC = () => {
   const [game, setGame] = useState<MazeGame | null>(null)
   const [bitstring, setBitstring] = useState<string>('')
   const [difficulty, setDifficulty] = useState<string>('easy')
+  const [showModal, setShowModal] = useState(false)
   const prevDifficultyRef: any = useRef()
+  const message =
+    difficulty !== 'hard'
+      ? 'Congratulations! You win! To try a harder difficulty, click the button below.'
+      : 'Congratulations! You cleared the hardest difficulty! If you would like to start over, press the button below.'
 
   useEffect(() => {
     prevDifficultyRef.current = difficulty
@@ -34,7 +45,8 @@ const MazeCanvas: React.FC = () => {
       } else if (!gameOver && prevDifficulty !== difficulty) {
         prevDifficultyRef.current = difficulty
       } else {
-        window.alert('You win')
+        // Game has been won :)
+        setShowModal(true)
       }
     }
     render()
@@ -49,11 +61,11 @@ const MazeCanvas: React.FC = () => {
       let offset: number = 0
       const range: number = 5
       if (difficulty === 'easy') {
-        offset = 7.5
+        offset = 5
       } else if (difficulty === 'medium') {
-        offset = 12.5
+        offset = 15
       } else if (difficulty === 'hard') {
-        offset = 17.5
+        offset = 25
       }
       const size = Math.floor(Math.random() * range + offset)
 
@@ -67,13 +79,11 @@ const MazeCanvas: React.FC = () => {
 
   useEffect(() => {
     if (bitstring !== '') {
-      console.log('Creating game...')
       setGame(new MazeGame(canvasRef.current!, bitstring.split('')))
     }
   }, [canvasRef, bitstring])
 
   useEffect(() => {
-    console.log('Game has changed...')
     if (game !== null) {
       game.setup()
       document.addEventListener('keyup', game.keyUpHandler, false)
@@ -84,18 +94,38 @@ const MazeCanvas: React.FC = () => {
   }, [game])
 
   return (
-    <div>
-      <IonSelect
-        value={difficulty}
-        placeholder="Select a Difficulty"
-        onIonChange={(e) => setDifficulty(e.detail.value)}
-      >
-        <IonSelectOption value="easy">Easy</IonSelectOption>
-        <IonSelectOption value="medium">Medium</IonSelectOption>
-        <IonSelectOption value="hard">Hard</IonSelectOption>
-      </IonSelect>
+    <IonContent>
+      <div className="dropdown-container">
+        <IonSelect
+          value={difficulty}
+          placeholder="Select a Difficulty"
+          onIonChange={(e) => setDifficulty(e.detail.value)}
+        >
+          <IonSelectOption value="easy">Easy</IonSelectOption>
+          <IonSelectOption value="medium">Medium</IonSelectOption>
+          <IonSelectOption value="hard">Hard</IonSelectOption>
+        </IonSelect>
+      </div>
       <canvas ref={canvasRef} />
-    </div>
+      <IonModal
+        showBackdrop={false}
+        isOpen={showModal}
+        cssClass="win-modal"
+        swipeToClose={true}
+      >
+        <p>{message}</p>
+        <IonButton
+          onClick={() => {
+            setShowModal(false)
+            if (difficulty === 'easy') setDifficulty('medium')
+            if (difficulty === 'medium') setDifficulty('hard')
+            if (difficulty === 'hard') setDifficulty('easy')
+          }}
+        >
+          Next Maze!
+        </IonButton>
+      </IonModal>
+    </IonContent>
   )
 }
 
