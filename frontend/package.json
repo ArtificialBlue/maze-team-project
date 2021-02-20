@@ -1,5 +1,6 @@
 {
   "name": "frontend",
+  "homepage": "https://artificialblue.github.io/maze-team-project/",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -28,7 +29,9 @@
     "start": "tsc && ionic serve",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -49,7 +52,8 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "2.4.6"
+    "@capacitor/cli": "2.4.6",
+    "gh-pages": "^3.1.0"
   },
   "description": "An Ionic project"
 }

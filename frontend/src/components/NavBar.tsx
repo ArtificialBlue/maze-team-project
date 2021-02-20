@@ -24,13 +24,6 @@ const NavBar: React.FC = () => {
             >
               Maze
             </NavLink>
-            <NavLink
-              className="nav-link"
-              activeClassName="active-link"
-              to="/about"
-            >
-              About
-            </NavLink>
           </div>
         </IonTitle>
       </IonToolbar>

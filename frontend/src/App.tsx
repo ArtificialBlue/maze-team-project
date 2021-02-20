@@ -1,6 +1,5 @@
 import Home from './pages/Home'
 import Maze from './pages/Maze'
-import About from './pages/About'
 import React from 'react'
 import { HashRouter as Router, Route } from 'react-router-dom'
 import { IonApp } from '@ionic/react'
@@ -30,7 +29,6 @@ const App: React.FC = () => (
     <Router>
       <Route exact path="/" component={Home} />
       <Route path="/maze" component={Maze} />
-      <Route path="/about" component={About} />
     </Router>
   </IonApp>
 )
