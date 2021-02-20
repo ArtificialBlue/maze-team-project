@@ -29,3 +29,6 @@ ion-select {
   display: flex;
   flex-direction: row;
 }
+ion-button button {
+  background: var(--color-gradient-secondary);
+}

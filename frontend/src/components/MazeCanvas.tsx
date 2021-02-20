@@ -69,7 +69,9 @@ const MazeCanvas: React.FC = () => {
       }
       const size = Math.floor(Math.random() * range + offset)
 
-      const res = await fetch(`http://localhost:5000/api/${size}`)
+      const res = await fetch(
+        `https://wildebeest-maze.herokuapp.com/api/${size}`
+      )
       const data = await res.json()
       setBitstring(data.bitstring)
     }
