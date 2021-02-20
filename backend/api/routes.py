@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from utils.generator import generate_maze
+from .generator import generate_maze
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
