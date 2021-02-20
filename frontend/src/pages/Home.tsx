@@ -1,6 +1,7 @@
 import React from 'react'
 import { IonContent, IonPage, IonTitle } from '@ionic/react'
 import NavBar from '../components/NavBar'
+import beast from './images/Wildebeest.png'
 
 const Home: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const Home: React.FC = () => {
         <IonTitle>
           <h1 className="ion-padding">Wildebeest Mazes</h1>
         </IonTitle>
-        <img src="https://www.asiliaafrica.com/media/funpvmw1/herds.jpg" />
+        <img className="home-content" src={beast} />
         <p className="home-content">
           This project was developed for SPD 1.3 by the
           <strong>WILDEBEEST COLLECTIVE</strong>. It utilizes Flask, React,
