@@ -13,9 +13,19 @@ canvas {
 ion-select {
   border: 1px solid var(--color-gradient-primary);
   width: fit-content;
+  margin-bottom: 24px;
 }
-.dropdown-container {
+.centered-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 24px;
+}
+.d-pad {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+.horizontal-buttons {
+  display: flex;
+  flex-direction: row;
 }

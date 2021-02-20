@@ -95,7 +95,7 @@ const MazeCanvas: React.FC = () => {
 
   return (
     <IonContent>
-      <div className="dropdown-container">
+      <div className="centered-container">
         <IonSelect
           value={difficulty}
           placeholder="Select a Difficulty"
@@ -107,6 +107,53 @@ const MazeCanvas: React.FC = () => {
         </IonSelect>
       </div>
       <canvas ref={canvasRef} />
+      <div className="centered-container">
+        <div className="d-pad">
+          <IonButton
+            onMouseDown={() => {
+              game?.buttonDownHandler('up')
+            }}
+            onMouseUp={() => {
+              game?.buttonUpHandler('up')
+            }}
+          >
+            Up
+          </IonButton>
+          <div className="horizontal-buttons">
+            <IonButton
+              onMouseDown={() => {
+                game?.buttonDownHandler('left')
+              }}
+              onMouseUp={() => {
+                game?.buttonUpHandler('left')
+              }}
+            >
+              Left
+            </IonButton>
+            <IonButton
+              onMouseDown={() => {
+                game?.buttonDownHandler('right')
+              }}
+              onMouseUp={() => {
+                game?.buttonUpHandler('right')
+              }}
+            >
+              Right
+            </IonButton>
+          </div>
+          <IonButton
+            onMouseDown={() => {
+              game?.buttonDownHandler('down')
+            }}
+            onMouseUp={() => {
+              game?.buttonUpHandler('down')
+            }}
+          >
+            Down
+          </IonButton>
+        </div>
+      </div>
+
       <IonModal
         showBackdrop={false}
         isOpen={showModal}

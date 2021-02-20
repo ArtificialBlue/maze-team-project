@@ -385,6 +385,48 @@ class MazeGame {
       }
     }
   }
+
+  buttonDownHandler = (button: string) => {
+    const { player, speed } = this
+    if (button === 'right') {
+      if (this.player.velocity.x <= 0) {
+        player.updateVelocity(new Vector(speed, 0))
+      }
+    } else if (button === 'left') {
+      if (player.velocity.x >= 0) {
+        player.updateVelocity(new Vector(-speed, 0))
+      }
+    } else if (button === 'up') {
+      if (player.velocity.y >= 0) {
+        player.updateVelocity(new Vector(0, -speed))
+      }
+    } else if (button === 'down') {
+      if (player.velocity.y <= 0) {
+        player.updateVelocity(new Vector(0, speed))
+      }
+    }
+  }
+
+  buttonUpHandler = (button: string) => {
+    const { player, speed } = this
+    if (button === 'right') {
+      if (player.velocity.x >= 0) {
+        player.updateVelocity(new Vector(-speed, 0))
+      }
+    } else if (button === 'left') {
+      if (player.velocity.x <= 0) {
+        player.updateVelocity(new Vector(speed, 0))
+      }
+    } else if (button === 'up') {
+      if (player.velocity.y <= 0) {
+        player.updateVelocity(new Vector(0, speed))
+      }
+    } else if (button === 'down') {
+      if (player.velocity.y >= 0) {
+        player.updateVelocity(new Vector(0, -speed))
+      }
+    }
+  }
 }
 
 export default MazeGame
