@@ -118,6 +118,12 @@ const MazeCanvas: React.FC = () => {
             onMouseUp={() => {
               game?.buttonUpHandler('up')
             }}
+            onTouchStart={() => {
+              game?.buttonDownHandler('up')
+            }}
+            onTouchEnd={() => {
+              game?.buttonUpHandler('up')
+            }}
           >
             Up
           </IonButton>
@@ -127,6 +133,12 @@ const MazeCanvas: React.FC = () => {
                 game?.buttonDownHandler('left')
               }}
               onMouseUp={() => {
+                game?.buttonUpHandler('left')
+              }}
+              onTouchStart={() => {
+                game?.buttonDownHandler('left')
+              }}
+              onTouchEnd={() => {
                 game?.buttonUpHandler('left')
               }}
             >
@@ -139,6 +151,12 @@ const MazeCanvas: React.FC = () => {
               onMouseUp={() => {
                 game?.buttonUpHandler('right')
               }}
+              onTouchStart={() => {
+                game?.buttonDownHandler('right')
+              }}
+              onTouchEnd={() => {
+                game?.buttonUpHandler('right')
+              }}
             >
               Right
             </IonButton>
@@ -148,6 +166,12 @@ const MazeCanvas: React.FC = () => {
               game?.buttonDownHandler('down')
             }}
             onMouseUp={() => {
+              game?.buttonUpHandler('down')
+            }}
+            onTouchStart={() => {
+              game?.buttonDownHandler('down')
+            }}
+            onTouchEnd={() => {
               game?.buttonUpHandler('down')
             }}
           >

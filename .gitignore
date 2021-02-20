@@ -6,6 +6,8 @@ node_modules/
 env/
 .eslintcache
 
+build/
+
 # Backend
 __pycache__/
 
