@@ -344,6 +344,7 @@ class MazeGame {
   clear = () => {}
 
   keyDownHandler = (e: KeyboardEvent): void => {
+    e.preventDefault()
     const { player, speed } = this
     const key = e.key.toLowerCase()
     if (key === 'd' || key === 'arrowright') {
