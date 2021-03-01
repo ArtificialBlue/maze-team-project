@@ -35,3 +35,40 @@ ion-button button {
 .hide {
   display: none;
 }
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+.loader div {
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+  width: 16px;
+  background: var(--color-gradient-primary);
+  animation: loader 1.5s ease-out infinite;
+}
+.loader div:nth-child(1) {
+  left: 0px;
+  animation-delay: -1s;
+}
+.loader div:nth-child(2) {
+  left: 42px;
+  animation-delay: -0.5s;
+}
+.loader div:nth-child(3) {
+  left: 84px;
+  animation-delay: 0;
+}
+@keyframes loader {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}
