@@ -8,13 +8,13 @@ const Home: React.FC = () => {
     <IonPage className="ion-text-center">
       <NavBar />
       <IonContent>
-        <IonTitle>
-          <h1 className="ion-padding">Wildebeest Mazes</h1>
-        </IonTitle>
+        <h1 id="title" className="ion-padding">
+          Wildebeest Mazes
+        </h1>
         <img className="home-content" src={beast} />
         <p className="home-content">
           This project was developed for SPD 1.3 by the
-          <strong>WILDEBEEST COLLECTIVE</strong>. It utilizes Flask, React,
+          <strong> WILDEBEEST COLLECTIVE</strong>. It utilizes Flask, React,
           TypeScript, and HTML Canvas to generate random solvable mazes and
           allow players to traverse them. Check out the project on
           <span>

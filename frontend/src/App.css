@@ -9,3 +9,6 @@ body * {
 .home-content a:hover {
   color: var(--color-maze-bricks);
 }
+#title {
+  word-wrap: break-word !important;
+}

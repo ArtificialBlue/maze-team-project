@@ -14,6 +14,7 @@ const MazeCanvas: React.FC = () => {
   const canvasRef = useRef(null)
   const [game, setGame] = useState<MazeGame | null>(null)
   const [bitstring, setBitstring] = useState<string>('')
+  const [loading, setLoading] = useState<string>('')
   const [difficulty, setDifficulty] = useState<string>('easy')
   const [showModal, setShowModal] = useState(false)
   const prevDifficultyRef: any = useRef()
@@ -90,13 +91,14 @@ const MazeCanvas: React.FC = () => {
       game.setup()
       document.addEventListener('keyup', game.keyUpHandler, false)
       document.addEventListener('keydown', game.keyDownHandler, false)
-
+      setLoading('hide')
       start()
     }
   }, [game])
 
   return (
     <IonContent>
+      <h3 className={loading}>Loading...</h3>
       <div className="centered-container">
         <IonSelect
           value={difficulty}

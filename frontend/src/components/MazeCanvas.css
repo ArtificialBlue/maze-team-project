@@ -32,3 +32,6 @@ ion-select {
 ion-button button {
   background: var(--color-gradient-secondary);
 }
+.hide {
+  display: none;
+}
