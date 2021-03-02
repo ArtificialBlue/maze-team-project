@@ -11,7 +11,7 @@ For this project, we are using
 - [HTML Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) - An API that provides the means to draw using HTML and JavaScript, used for drawing the maze and player.
 
 ## Usage:
-Navigate to <TBD_URL> and play! It's that simple.
+[Click here](https://artificialblue.github.io/maze-team-project/) to play!
 
 ## Collaboration:
 If you're interested in adding/improving a feature to the project, follow these steps:
